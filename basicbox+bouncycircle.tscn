@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://d2k5kviwupl3e"]
+
+[ext_resource type="Script" uid="uid://c1s4p8l576ujc" path="res://player.gd" id="1_jivrx"]
+[ext_resource type="Script" uid="uid://bp2sg1xbqpcve" path="res://main.gd" id="1_xnues"]
+[ext_resource type="Script" uid="uid://di37me8yqfqor" path="res://floor.gd" id="2_8yp81"]
+[ext_resource type="Script" uid="uid://dqtvf608cxis" path="res://ball.gd" id="2_h23hg"]
+[ext_resource type="Script" uid="uid://csolfdu56muo6" path="res://team.gd" id="3_xnues"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lgw31"]
+radius = 50.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lquwl"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuox8"]
+size = Vector2(5000, 40)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_272bh"]
+bounce = 1.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5vw27"]
+bounce = 1.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7mycd"]
+bounce = 1.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2yge"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xuox8"]
+radius = 100.0
+
+[node name="Main" type="Node2D" unique_id=964291078]
+script = ExtResource("1_xnues")
+
+[node name="Ball" type="RigidBody2D" parent="." unique_id=392170097]
+gravity_scale = 0.0
+linear_damp = 0.2
+script = ExtResource("2_h23hg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=1700403319]
+shape = SubResource("CircleShape2D_lgw31")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=124679750]
+zoom = Vector2(0.25, 0.25)
+
+[node name="Stadium" type="Node2D" parent="." unique_id=668052781]
+
+[node name="Floor" type="StaticBody2D" parent="Stadium" unique_id=913516912]
+position = Vector2(0, 1300)
+physics_material_override = SubResource("PhysicsMaterial_lquwl")
+script = ExtResource("2_8yp81")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stadium/Floor" unique_id=1843336243]
+shape = SubResource("RectangleShape2D_xuox8")
+
+[node name="LeftWall" type="StaticBody2D" parent="Stadium" unique_id=878571277]
+position = Vector2(-2300, 10)
+rotation = 1.5707964
+physics_material_override = SubResource("PhysicsMaterial_272bh")
+script = ExtResource("2_8yp81")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stadium/LeftWall" unique_id=60072429]
+shape = SubResource("RectangleShape2D_xuox8")
+
+[node name="RightWall" type="StaticBody2D" parent="Stadium" unique_id=478899523]
+position = Vector2(2295, -22)
+rotation = 1.5707964
+physics_material_override = SubResource("PhysicsMaterial_5vw27")
+script = ExtResource("2_8yp81")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stadium/RightWall" unique_id=1319038436]
+shape = SubResource("RectangleShape2D_xuox8")
+
+[node name="Ceiling" type="StaticBody2D" parent="Stadium" unique_id=1239314861]
+position = Vector2(0, -1300)
+physics_material_override = SubResource("PhysicsMaterial_7mycd")
+script = ExtResource("2_8yp81")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stadium/Ceiling" unique_id=755133672]
+shape = SubResource("RectangleShape2D_xuox8")
+
+[node name="Team1" type="Node2D" parent="." unique_id=1225841164]
+script = ExtResource("3_xnues")
+teamid = 1
+
+[node name="Player1" type="RigidBody2D" parent="Team1" unique_id=1450844946]
+position = Vector2(900, 0)
+physics_material_override = SubResource("PhysicsMaterial_h2yge")
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 0.5
+script = ExtResource("1_jivrx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Team1/Player1" unique_id=851116484]
+shape = SubResource("CircleShape2D_xuox8")
+
+[node name="Team2" type="Node2D" parent="." unique_id=1078660843]
+script = ExtResource("3_xnues")
+teamid = 2
+
+[node name="Player1" type="RigidBody2D" parent="Team2" unique_id=1523125476]
+position = Vector2(-900, 0)
+physics_material_override = SubResource("PhysicsMaterial_h2yge")
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 0.8
+script = ExtResource("1_jivrx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Team2/Player1" unique_id=1446794276]
+shape = SubResource("CircleShape2D_xuox8")
